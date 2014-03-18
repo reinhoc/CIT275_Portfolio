@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace reinhoc_HelpDesk
 {
-    public partial class Form1 : Form
+    public partial class custForm : Form
     {
-        public Form1()
+        public custForm()
         {
             InitializeComponent();
         }
