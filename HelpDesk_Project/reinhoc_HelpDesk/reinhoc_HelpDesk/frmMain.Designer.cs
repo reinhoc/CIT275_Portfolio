@@ -1,6 +1,6 @@
 ﻿namespace reinhoc_HelpDesk
 {
-    partial class mainForm
+    partial class frmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -67,7 +67,7 @@
             this.btnTicket.Name = "btnTicket";
             this.btnTicket.Size = new System.Drawing.Size(156, 108);
             this.btnTicket.TabIndex = 3;
-            this.btnTicket.Text = "btnTicket";
+            this.btnTicket.Text = "Help Tickets";
             this.btnTicket.UseVisualStyleBackColor = true;
             // 
             // btnEmployee

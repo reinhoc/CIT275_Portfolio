@@ -1,6 +1,6 @@
 ﻿namespace reinhoc_HelpDesk
 {
-    partial class custForm
+    partial class frmCust
     {
         /// <summary>
         /// Required designer variable.

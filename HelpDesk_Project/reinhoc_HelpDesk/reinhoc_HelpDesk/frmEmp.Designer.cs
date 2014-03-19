@@ -1,6 +1,6 @@
 ﻿namespace reinhoc_HelpDesk
 {
-    partial class empForm
+    partial class frmEmp
     {
         /// <summary>
         /// Required designer variable.
