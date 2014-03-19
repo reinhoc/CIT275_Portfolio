@@ -44,34 +44,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="empForm.cs">
+    <Compile Include="Business_Classes\Customer.cs" />
+    <Compile Include="Business_Classes\CustTick.cs" />
+    <Compile Include="Business_Classes\Employee.cs" />
+    <Compile Include="Business_Classes\EmpTick.cs" />
+    <Compile Include="Business_Classes\Ticket.cs" />
+    <Compile Include="frmEmp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="empForm.Designer.cs">
-      <DependentUpon>empForm.cs</DependentUpon>
+    <Compile Include="frmEmp.Designer.cs">
+      <DependentUpon>frmEmp.cs</DependentUpon>
     </Compile>
-    <Compile Include="custForm.cs">
+    <Compile Include="frmCust.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="custForm.Designer.cs">
-      <DependentUpon>custForm.cs</DependentUpon>
+    <Compile Include="frmCust.Designer.cs">
+      <DependentUpon>frmCust.cs</DependentUpon>
     </Compile>
-    <Compile Include="mainForm.cs">
+    <Compile Include="frmManageTick.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="mainForm.Designer.cs">
-      <DependentUpon>mainForm.cs</DependentUpon>
+    <Compile Include="frmManageTick.Designer.cs">
+      <DependentUpon>frmManageTick.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTicket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTicket.Designer.cs">
+      <DependentUpon>frmTicket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="custForm.resx">
-      <DependentUpon>custForm.cs</DependentUpon>
+    <EmbeddedResource Include="frmCust.resx">
+      <DependentUpon>frmCust.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="empForm.resx">
-      <DependentUpon>empForm.cs</DependentUpon>
+    <EmbeddedResource Include="frmEmp.resx">
+      <DependentUpon>frmEmp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="mainForm.resx">
-      <DependentUpon>mainForm.cs</DependentUpon>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageTick.resx">
+      <DependentUpon>frmManageTick.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTicket.resx">
+      <DependentUpon>frmTicket.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

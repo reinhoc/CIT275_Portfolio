@@ -216,7 +216,7 @@
             this.Controls.Add(this.txtTickNum);
             this.Controls.Add(this.lblTickNum);
             this.Name = "frmManageTick";
-            this.Text = "frmManageTick";
+            this.Text = "Add/Edit Tickets";
             this.gboTickBox.ResumeLayout(false);
             this.gboTickBox.PerformLayout();
             this.ResumeLayout(false);
