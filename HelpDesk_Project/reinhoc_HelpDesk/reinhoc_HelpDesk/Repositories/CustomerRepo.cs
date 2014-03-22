@@ -20,7 +20,7 @@ namespace reinhoc_HelpDesk.Repositories
 
             var sb = new StringBuilder();
             sb.Append("Select CustID, CustName, CustAddress, CustState, CustZip");
-            sb.Append("From Users");
+            sb.Append("From Customer");
 
             using (corpcn)
             {
@@ -42,17 +42,20 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
-        public Customer GetCustomer(int userID)
+        public Customer GetCustomer(int CustID)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
             var sb = new StringBuilder();
             sb.Append("Select CustID, CustName, CustAddress, CustState, CustZip");
-            sb.Append("From Users");
-            sb.Append("Where UserID = " + userID);
+            sb.Append("From Customer");
+            sb.Append("Where CustID = " + CustID);
 
             using (corpcn)
             {
+                //Needed this here to be able to use the variable towards the end. Some type of scope error.
+                Customer customer = null;
+
                 SqlCommand corpCmd = corpcn.CreateCommand();
                 corpCmd.CommandType = CommandType.Text;
                 corpCmd.CommandText = sb.ToString();
@@ -61,10 +64,11 @@ namespace reinhoc_HelpDesk.Repositories
 
                 while (corprdr.Read())
                 {
-                    Customer customer = CreateCustomer(corprdr);
+                    customer = CreateCustomer(corprdr);
                 }
 
                 corprdr.Close();
+
                 return customer;
             }
         }
