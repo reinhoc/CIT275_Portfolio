@@ -11,6 +11,7 @@ namespace reinhoc_HelpDesk.Business_Classes
         #region [Private Fields]
         private int _empID;
         private int _tickID;
+   
         #endregion
 
         #region [Public Properties]
