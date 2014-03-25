@@ -42,13 +42,13 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
-        public Customer GetCustomer(int custID)
+        public Customer GetCustomer(Customer cust)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
             var sb = new StringBuilder();
             sb.Append("Select CustID, CustName, CustAddress, CustState, CustZip ");
-            sb.Append("From Customer Where CustID = '").Append(custID).Append("'");
+            sb.Append("From Customer Where CustID = '").Append(cust.CustID).Append("'");
             sb.Append(";");
 
             using (corpcn)

@@ -47,7 +47,12 @@ namespace reinhoc_HelpDesk.Unit_Tests
         [TestMethod]
         public void GetCustomerTest()
         {
-            cust = custRepo.GetCustomer(9);
+            cust.CustID = 9;
+            cust.CustName = "Jessica Reinhold";
+            cust.CustAddress = "504 N. Cedar St.";
+            cust.CustState = "MI";
+            cust.CustZip = 49646;
+            custRepo.GetCustomer(cust);
             Assert.AreEqual("Jessica Reinhold", cust.CustName);
         }
     }
