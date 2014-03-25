@@ -48,12 +48,8 @@ namespace reinhoc_HelpDesk.Unit_Tests
         public void GetCustomerTest()
         {
             cust.CustID = 9;
-            cust.CustName = "Jessica Reinhold";
-            cust.CustAddress = "504 N. Cedar St.";
-            cust.CustState = "MI";
-            cust.CustZip = 49646;
-            custRepo.GetCustomer(cust);
-            Assert.AreEqual("Jessica Reinhold", cust.CustName);
+            var custTest = custRepo.GetCustomer(cust);
+            Assert.AreEqual("Jessica Reinhold", custTest.CustName);
         }
     }
 }
