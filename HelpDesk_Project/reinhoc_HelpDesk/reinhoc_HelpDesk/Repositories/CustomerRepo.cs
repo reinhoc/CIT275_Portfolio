@@ -42,14 +42,14 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
-        public Customer GetCustomer(int CustID)
+        public Customer GetCustomer(int custID)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
             var sb = new StringBuilder();
             sb.Append("Select CustID, CustName, CustAddress, CustState, CustZip ");
-            sb.Append("From Customer");
-            sb.Append("Where CustID = " + CustID);
+            sb.Append("From Customer Where CustID = '").Append(custID).Append("'");
+            sb.Append(";");
 
             using (corpcn)
             {
@@ -73,7 +73,7 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
-        public Customer InsertCustomer(Customer cust)
+        public void InsertCustomer(Customer cust)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
@@ -88,28 +88,15 @@ namespace reinhoc_HelpDesk.Repositories
 
             using (corpcn)
             {
-                //Needed this here to be able to use the variable towards the end. Some type of scope error.
-                Customer customer = null;
-
                 SqlCommand corpCmd = corpcn.CreateCommand();
                 corpCmd.CommandType = CommandType.Text;
                 corpCmd.CommandText = sb.ToString();
                 corpcn.Open();
                 corpCmd.ExecuteNonQuery();
-                SqlDataReader corprdr = corpCmd.ExecuteReader();
-
-                while (corprdr.Read())
-                {
-                    customer = CreateCustomer(corprdr);
-                }
-
-                corprdr.Close();
-
-                return customer;
             }
         }
 
-        public Customer UpdateCustomer(Customer cust)
+        public void UpdateCustomer(Customer cust)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
@@ -133,16 +120,6 @@ namespace reinhoc_HelpDesk.Repositories
                 corpCmd.CommandText = sb.ToString();
                 corpcn.Open();
                 corpCmd.ExecuteNonQuery();
-                SqlDataReader corprdr = corpCmd.ExecuteReader();
-
-                while (corprdr.Read())
-                {
-                    customer = CreateCustomer(corprdr);
-                }
-
-                corprdr.Close();
-
-                return customer;
             }
         }
 
