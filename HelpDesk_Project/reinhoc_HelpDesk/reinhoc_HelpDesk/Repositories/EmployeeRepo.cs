@@ -105,7 +105,7 @@ namespace reinhoc_HelpDesk.Repositories
             sb.Append("[EmpFName]='").Append(emp.EmpFName).Append("',");
             sb.Append("[EmpLName]='").Append(emp.EmpLName).Append("',");
             sb.Append("[EmpUName]='").Append(emp.EmpUName).Append("'");
-            sb.Append("Where [EmpID]='").Append(emp.EmpID).Append("");
+            sb.Append("Where [EmpID]='").Append(emp.EmpID).Append("';");
 
 
             using (corpcn)
