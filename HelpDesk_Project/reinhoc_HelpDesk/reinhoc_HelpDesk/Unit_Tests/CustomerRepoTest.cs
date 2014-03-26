@@ -41,7 +41,7 @@ namespace reinhoc_HelpDesk.Unit_Tests
         public void GetCustomersTest()
         {
             var test = custRepo.GetCustomers();
-            Assert.AreEqual(10, test.Count());
+            Assert.AreEqual(11, test.Count());
         }
 
         [TestMethod]

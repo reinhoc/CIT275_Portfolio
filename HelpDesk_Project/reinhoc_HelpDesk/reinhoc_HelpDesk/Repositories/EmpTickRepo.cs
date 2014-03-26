@@ -42,15 +42,15 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
-        public EmpTick GetEmpTick(int EmpID, int TickID)
+        public EmpTick GetEmpTick(EmpTick empTTick)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
             var sb = new StringBuilder();
             sb.Append("Select EmpID, TickID ");
-            sb.Append("From EmpTick");
-            sb.Append("Where EmpID = " + EmpID);
-            sb.Append("and TickID= " + TickID);
+            sb.Append("From EmpTick ");
+            sb.Append("Where EmpID = '").Append(empTTick.EmpID).Append("'");
+            sb.Append("and TickID= '").Append(empTTick.TickID).Append("';");
 
             using (corpcn)
             {
@@ -74,7 +74,7 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
-        public EmpTick InsertCustomer(EmpTick emp)
+        public void InsertEmpTick(EmpTick emp)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
@@ -83,73 +83,47 @@ namespace reinhoc_HelpDesk.Repositories
             sb.Append(" ([EmpID], [TickID])");
             sb.Append(" Values (");
             sb.Append("'").Append(emp.EmpID).Append("',");
-            sb.Append("'").Append(emp.TickID).Append("'");
+            sb.Append("'").Append(emp.TickID).Append("');");
 
             using (corpcn)
             {
-                //Needed this here to be able to use the variable towards the end. Some type of scope error.
-                EmpTick empT = null;
-
                 SqlCommand corpCmd = corpcn.CreateCommand();
                 corpCmd.CommandType = CommandType.Text;
                 corpCmd.CommandText = sb.ToString();
                 corpcn.Open();
                 corpCmd.ExecuteNonQuery();
-                SqlDataReader corprdr = corpCmd.ExecuteReader();
-
-                while (corprdr.Read())
-                {
-                    empT = CreateEmpTick(corprdr);
-                }
-
-                corprdr.Close();
-
-                return empT;
             }
         }
 
-        public EmpTick UpdateCustomer(EmpTick emp)
-        {
-            SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
+        //public void UpdateCustomer(EmpTick emp)
+        //{
+        //    SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
-            var sb = new StringBuilder();
-            sb.Append("Update [EmpTick]");
-            sb.Append(" Set ");
-            sb.Append("[EmpID]='").Append(emp.EmpID).Append("',");
-            sb.Append("[TickID]='").Append(emp.TickID).Append("'");
-            sb.Append("Where [EmpID]=").Append(emp.EmpID);
-            sb.Append("and [TickID]=").Append(emp.TickID);
+        //    var sb = new StringBuilder();
+        //    sb.Append("Update [EmpTick]");
+        //    sb.Append(" Set ");
+        //    sb.Append("[EmpID]='").Append(emp.EmpID).Append("',");
+        //    sb.Append("[TickID]='").Append(emp.TickID).Append("'");
+        //    sb.Append("Where [EmpID]='").Append(emp.EmpID).Append("'");
+        //    sb.Append("and [TickID]=").Append(emp.TickID).Append("';");
 
 
-            using (corpcn)
-            {
-                //Needed this here to be able to use the variable towards the end. Some type of scope error.
-                EmpTick empT = null;
-
-                SqlCommand corpCmd = corpcn.CreateCommand();
-                corpCmd.CommandType = CommandType.Text;
-                corpCmd.CommandText = sb.ToString();
-                corpcn.Open();
-                corpCmd.ExecuteNonQuery();
-                SqlDataReader corprdr = corpCmd.ExecuteReader();
-
-                while (corprdr.Read())
-                {
-                    empT = CreateEmpTick(corprdr);
-                }
-
-                corprdr.Close();
-
-                return empT;
-            }
-        }
+        //    using (corpcn)
+        //    {
+        //        SqlCommand corpCmd = corpcn.CreateCommand();
+        //        corpCmd.CommandType = CommandType.Text;
+        //        corpCmd.CommandText = sb.ToString();
+        //        corpcn.Open();
+        //        corpCmd.ExecuteNonQuery();
+        //    }
+        //}
 
 
         private EmpTick CreateEmpTick(SqlDataReader dr)
         {
             var e = new EmpTick();
             e.EmpID = (int)dr["EmpID"];
-            e.TickID = (int)dr["EmpFName"];
+            e.TickID = (int)dr["TickID"];
             return e;
         }
     }

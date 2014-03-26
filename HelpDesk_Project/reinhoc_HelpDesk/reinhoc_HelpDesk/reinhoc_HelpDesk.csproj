@@ -88,6 +88,10 @@
     <Compile Include="Repositories\EmpTickRepo.cs" />
     <Compile Include="Repositories\TicketRepo.cs" />
     <Compile Include="Unit_Tests\CustomerRepoTest.cs" />
+    <Compile Include="Unit_Tests\CustTickRepoTest.cs" />
+    <Compile Include="Unit_Tests\EmployeeRepoTest.cs" />
+    <Compile Include="Unit_Tests\EmpTickTest.cs" />
+    <Compile Include="Unit_Tests\TickRepoTest.cs" />
     <EmbeddedResource Include="frmCust.resx">
       <DependentUpon>frmCust.cs</DependentUpon>
     </EmbeddedResource>

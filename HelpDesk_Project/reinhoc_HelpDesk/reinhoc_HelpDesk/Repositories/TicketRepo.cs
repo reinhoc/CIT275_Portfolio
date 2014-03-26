@@ -13,7 +13,7 @@ namespace reinhoc_HelpDesk.Repositories
 {
     class TicketRepo
     {
-        public List<Ticket> GetTicket()
+        public List<Ticket> GetTickets()
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
@@ -41,14 +41,14 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
-        public Ticket GetTicket(int TickID)
+        public Ticket GetTicket(Ticket ticket)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
             var sb = new StringBuilder();
             sb.Append("Select TickID, ProblemTitle, ProblemDescription, Severity, Completed ");
-            sb.Append("From Ticket");
-            sb.Append("Where TickID = " + TickID);
+            sb.Append("From Ticket ");
+            sb.Append("Where TickID = '").Append(ticket.TickID).Append("';");
 
             using (corpcn)
             {
@@ -72,7 +72,7 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
-        public Ticket InsertCustomer(Ticket tick)
+        public void InsertTicket(Ticket tick)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
@@ -82,33 +82,20 @@ namespace reinhoc_HelpDesk.Repositories
             sb.Append(" Values (");
             sb.Append("'").Append(tick.ProblemTitle).Append("',");
             sb.Append("'").Append(tick.ProblemDescription).Append("',");
-            sb.Append("").Append(tick.Severity).Append(",");
+            sb.Append("'").Append(tick.Severity).Append("',");
             sb.Append("'").Append(tick.Completed).Append("')");
 
             using (corpcn)
             {
-                //Needed this here to be able to use the variable towards the end. Some type of scope error.
-                Ticket ticks = null;
-
                 SqlCommand corpCmd = corpcn.CreateCommand();
                 corpCmd.CommandType = CommandType.Text;
                 corpCmd.CommandText = sb.ToString();
                 corpcn.Open();
                 corpCmd.ExecuteNonQuery();
-                SqlDataReader corprdr = corpCmd.ExecuteReader();
-
-                while (corprdr.Read())
-                {
-                    ticks = CreateTicket(corprdr);
-                }
-
-                corprdr.Close();
-
-                return ticks;
             }
         }
 
-        public Ticket UpdateTicket(Ticket tick)
+        public void UpdateTicket(Ticket tick)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
@@ -124,27 +111,13 @@ namespace reinhoc_HelpDesk.Repositories
 
             using (corpcn)
             {
-                //Needed this here to be able to use the variable towards the end. Some type of scope error.
-                Ticket ticks = null;
-
                 SqlCommand corpCmd = corpcn.CreateCommand();
                 corpCmd.CommandType = CommandType.Text;
                 corpCmd.CommandText = sb.ToString();
                 corpcn.Open();
                 corpCmd.ExecuteNonQuery();
-                SqlDataReader corprdr = corpCmd.ExecuteReader();
-
-                while (corprdr.Read())
-                {
-                    ticks = CreateTicket(corprdr);
-                }
-
-                corprdr.Close();
-
-                return ticks;
             }
         }
-
 
         private Ticket CreateTicket(SqlDataReader dr)
         {
@@ -153,7 +126,7 @@ namespace reinhoc_HelpDesk.Repositories
             t.ProblemTitle = dr["ProblemTitle"].ToString();
             t.ProblemDescription = dr["ProblemDescription"].ToString();
             t.Severity = (int)dr["Severity"];
-            t.Completed = (bool)dr["CustZip"];
+            t.Completed = (bool)dr["Completed"];
             return t;
         }
     }

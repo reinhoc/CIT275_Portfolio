@@ -44,7 +44,7 @@ namespace reinhoc_HelpDesk.Business_Classes
         public bool Completed
         {
             get { return _completed; }
-            set { _completed = value; }
+            set { _completed = value; }           
         }
         #endregion
 

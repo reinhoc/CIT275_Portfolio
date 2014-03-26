@@ -112,9 +112,6 @@ namespace reinhoc_HelpDesk.Repositories
 
             using (corpcn)
             {
-                //Needed this here to be able to use the variable towards the end. Some type of scope error.
-                Customer customer = null;
-
                 SqlCommand corpCmd = corpcn.CreateCommand();
                 corpCmd.CommandType = CommandType.Text;
                 corpCmd.CommandText = sb.ToString();

@@ -41,14 +41,15 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
-        public CustTick GetCustTick(int CustID)
+        public CustTick GetCustTick(CustTick custT)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
             var sb = new StringBuilder();
             sb.Append("Select CustID, TickID, FixDescription ");
-            sb.Append("From CustTick");
-            sb.Append("Where EmpID = " + CustID);
+            sb.Append("From CustTick ");
+            sb.Append("Where CustID ='").Append(custT.CustID).Append("'");
+            sb.Append(" And TickID ='").Append(custT.TickID).Append("';");
 
             using (corpcn)
             {
@@ -72,7 +73,7 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
-        public CustTick InsertCustomer(CustTick cust)
+        public void InsertCustTick(CustTick cust)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
@@ -82,32 +83,19 @@ namespace reinhoc_HelpDesk.Repositories
             sb.Append(" Values (");
             sb.Append("'").Append(cust.CustID).Append("',");
             sb.Append("'").Append(cust.TickID).Append("',");
-            sb.Append("'").Append(cust.FixDescription).Append("',");
+            sb.Append("'").Append(cust.FixDescription).Append("');");
 
             using (corpcn)
             {
-                //Needed this here to be able to use the variable towards the end. Some type of scope error.
-                CustTick custT = null;
-
                 SqlCommand corpCmd = corpcn.CreateCommand();
                 corpCmd.CommandType = CommandType.Text;
                 corpCmd.CommandText = sb.ToString();
                 corpcn.Open();
                 corpCmd.ExecuteNonQuery();
-                SqlDataReader corprdr = corpCmd.ExecuteReader();
-
-                while (corprdr.Read())
-                {
-                    custT = CreateCustTick(corprdr);
-                }
-
-                corprdr.Close();
-
-                return custT;
             }
         }
 
-        public CustTick UpdateCustomer(CustTick cust)
+        public void UpdateCustTick(CustTick cust)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
@@ -116,30 +104,18 @@ namespace reinhoc_HelpDesk.Repositories
             sb.Append(" Set ");
             sb.Append("[CustID]='").Append(cust.CustID).Append("',");
             sb.Append("[TickID]='").Append(cust.TickID).Append("',");
-            sb.Append("[FixDescription]='").Append(cust.FixDescription).Append("',");
-            sb.Append("Where [EmpID]=").Append(cust.CustID);
+            sb.Append("[FixDescription]='").Append(cust.FixDescription).Append("'");
+            sb.Append("Where [CustID]='").Append(cust.CustID).Append("'");
+            sb.Append("And [TickID]='").Append(cust.TickID).Append("';");
 
 
             using (corpcn)
             {
-                //Needed this here to be able to use the variable towards the end. Some type of scope error.
-                CustTick custT = null;
-
                 SqlCommand corpCmd = corpcn.CreateCommand();
                 corpCmd.CommandType = CommandType.Text;
                 corpCmd.CommandText = sb.ToString();
                 corpcn.Open();
                 corpCmd.ExecuteNonQuery();
-                SqlDataReader corprdr = corpCmd.ExecuteReader();
-
-                while (corprdr.Read())
-                {
-                    custT = CreateCustTick(corprdr);
-                }
-
-                corprdr.Close();
-
-                return custT;
             }
         }
 

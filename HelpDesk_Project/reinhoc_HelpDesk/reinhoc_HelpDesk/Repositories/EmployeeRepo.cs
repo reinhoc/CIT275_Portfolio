@@ -42,14 +42,14 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
-        public Employee GetCustomer(int EmpID)
+        public Employee GetEmployee(Employee Emp)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
             var sb = new StringBuilder();
             sb.Append("Select EmpID, EmpFName, EmpLName, EmpUName ");
-            sb.Append("From Employee");
-            sb.Append("Where EmpID = " + EmpID);
+            sb.Append("From Employee ");
+            sb.Append("Where EmpID = '").Append(Emp.EmpID).Append("'");
 
             using (corpcn)
             {
@@ -73,7 +73,7 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
-        public Employee InsertCustomer(Employee emp)
+        public void InsertEmployee(Employee emp)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
@@ -83,32 +83,19 @@ namespace reinhoc_HelpDesk.Repositories
             sb.Append(" Values (");
             sb.Append("'").Append(emp.EmpFName).Append("',");
             sb.Append("'").Append(emp.EmpLName).Append("',");
-            sb.Append("'").Append(emp.EmpUName).Append("',");
+            sb.Append("'").Append(emp.EmpUName).Append("')");
 
             using (corpcn)
             {
-                //Needed this here to be able to use the variable towards the end. Some type of scope error.
-                Employee employee = null;
-
                 SqlCommand corpCmd = corpcn.CreateCommand();
                 corpCmd.CommandType = CommandType.Text;
                 corpCmd.CommandText = sb.ToString();
                 corpcn.Open();
                 corpCmd.ExecuteNonQuery();
-                SqlDataReader corprdr = corpCmd.ExecuteReader();
-
-                while (corprdr.Read())
-                {
-                    employee = CreateEmployee(corprdr);
-                }
-
-                corprdr.Close();
-
-                return employee;
             }
         }
 
-        public Employee UpdateCustomer(Employee emp)
+        public void UpdateEmployee(Employee emp)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
@@ -117,33 +104,19 @@ namespace reinhoc_HelpDesk.Repositories
             sb.Append(" Set ");
             sb.Append("[EmpFName]='").Append(emp.EmpFName).Append("',");
             sb.Append("[EmpLName]='").Append(emp.EmpLName).Append("',");
-            sb.Append("[EmpUName]='").Append(emp.EmpUName).Append("',");
-            sb.Append("Where [EmpID]=").Append(emp.EmpID);
+            sb.Append("[EmpUName]='").Append(emp.EmpUName).Append("'");
+            sb.Append("Where [EmpID]='").Append(emp.EmpID).Append("");
 
 
             using (corpcn)
             {
-                //Needed this here to be able to use the variable towards the end. Some type of scope error.
-                Employee employee = null;
-
                 SqlCommand corpCmd = corpcn.CreateCommand();
                 corpCmd.CommandType = CommandType.Text;
                 corpCmd.CommandText = sb.ToString();
                 corpcn.Open();
                 corpCmd.ExecuteNonQuery();
-                SqlDataReader corprdr = corpCmd.ExecuteReader();
-
-                while (corprdr.Read())
-                {
-                    employee = CreateEmployee(corprdr);
-                }
-
-                corprdr.Close();
-
-                return employee;
             }
         }
-
 
         private Employee CreateEmployee(SqlDataReader dr)
         {
