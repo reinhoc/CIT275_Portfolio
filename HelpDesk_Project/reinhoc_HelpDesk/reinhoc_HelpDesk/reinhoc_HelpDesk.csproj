@@ -50,6 +50,7 @@
     <Compile Include="Business_Classes\Employee.cs" />
     <Compile Include="Business_Classes\EmpTick.cs" />
     <Compile Include="Business_Classes\Ticket.cs" />
+    <Compile Include="Facade\HelpFacade.cs" />
     <Compile Include="frmEmp.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -12,11 +12,14 @@ using reinhoc_HelpDesk.Business_Classes;
 namespace reinhoc_HelpDesk.Repositories
 {
     class EmployeeRepo
-        {
-            
+    {
+        /// <summary>
+        /// Gets a list of all employees
+        /// </summary>
+        /// <returns>List of Employees</returns>
         public List<Employee> GetEmployees()
         {
-        SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
+            SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
             var sb = new StringBuilder();
             sb.Append("Select EmpID, EmpFName, EmpLName, EmpUName ");
@@ -30,7 +33,7 @@ namespace reinhoc_HelpDesk.Repositories
                 corpCmd.CommandText = sb.ToString();
                 corpcn.Open();
                 SqlDataReader corprdr = corpCmd.ExecuteReader();
-                
+
                 while (corprdr.Read())
                 {
                     Employee emp = CreateEmployee(corprdr);
@@ -42,6 +45,11 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets a single employee
+        /// </summary>
+        /// <param name="Emp">Employee parameter</param>
+        /// <returns>Returns a single employee</returns>
         public Employee GetEmployee(Employee Emp)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
@@ -72,7 +80,10 @@ namespace reinhoc_HelpDesk.Repositories
                 return employee;
             }
         }
-
+        /// <summary>
+        /// Adds an employee
+        /// </summary>
+        /// <param name="emp">Employee parameter</param>
         public void InsertEmployee(Employee emp)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
@@ -95,6 +106,10 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
+        /// <summary>
+        /// Updates an existing employee
+        /// </summary>
+        /// <param name="emp">Employee parameter</param>
         public void UpdateEmployee(Employee emp)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
@@ -117,7 +132,11 @@ namespace reinhoc_HelpDesk.Repositories
                 corpCmd.ExecuteNonQuery();
             }
         }
-
+        /// <summary>
+        /// Creates an internal employee
+        /// </summary>
+        /// <param name="dr">SQL Data Reader</param>
+        /// <returns>Employee</returns>
         private Employee CreateEmployee(SqlDataReader dr)
         {
             var e = new Employee();

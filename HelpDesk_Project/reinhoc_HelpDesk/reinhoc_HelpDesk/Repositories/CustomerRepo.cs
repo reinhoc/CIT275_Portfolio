@@ -13,7 +13,10 @@ namespace reinhoc_HelpDesk.Repositories
 {
     class CustomerRepo
     {
-
+        /// <summary>
+        /// Get a list of all customers
+        /// </summary>
+        /// <returns></returns>
         public List<Customer> GetCustomers()
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
@@ -42,6 +45,11 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
+        /// <summary>
+        /// Get a single customer
+        /// </summary>
+        /// <param name="cust">Customer parameter</param>
+        /// <returns></returns>
         public Customer GetCustomer(Customer cust)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
@@ -73,6 +81,10 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
+        /// <summary>
+        /// Add a customer
+        /// </summary>
+        /// <param name="cust">Customer Property</param>
         public void InsertCustomer(Customer cust)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
@@ -96,6 +108,10 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
+        /// <summary>
+        /// Update Customer
+        /// </summary>
+        /// <param name="cust">Customer Parameter</param>
         public void UpdateCustomer(Customer cust)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
@@ -120,7 +136,11 @@ namespace reinhoc_HelpDesk.Repositories
             }
         }
 
-
+        /// <summary>
+        /// Creates an internal customer
+        /// </summary>
+        /// <param name="dr">SQL Data Reader</param>
+        /// <returns></returns>
         private Customer CreateCustomer(SqlDataReader dr)
         {
             var c = new Customer();
