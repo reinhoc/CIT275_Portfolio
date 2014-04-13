@@ -21,6 +21,7 @@ namespace reinhoc_HelpDesk.Unit_Tests
             ticket.ProblemDescription = "Having issues using debug within coding window.";
             ticket.Severity = 1;
             ticket.Completed = true;
+            ticket.FixDescription = "Make sure the class is public";
             ticketRepo.InsertTicket(ticket);
         }
 
@@ -32,6 +33,7 @@ namespace reinhoc_HelpDesk.Unit_Tests
             ticket.ProblemDescription = "Having issues using debug within coding window.";
             ticket.Severity = 1;
             ticket.Completed = true;
+            ticket.FixDescription = "Make sure the class is public";
             ticketRepo.UpdateTicket(ticket);
         }
 

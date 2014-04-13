@@ -19,7 +19,7 @@ namespace reinhoc_HelpDesk.Unit_Tests
         public void AddCustomerTest()
         {            
             
-            cust.CustName = "Test Company";
+            cust.CustName = "Super Test Company";
             cust.CustAddress = "999 Test Ave";
             cust.CustState = "MI";
             cust.CustZip = 49646;

@@ -20,34 +20,15 @@ namespace reinhoc_HelpDesk.Unit_Tests
         {
 
             custT.CustID = 1;
-            custT.TickID = 1;
-            custT.FixDescription = "Add public to the beginning of your class";            
+            custT.TickID = 1002;     
             custTRepo.InsertCustTick(custT);
         }
-
         [TestMethod]
-        public void UpdateCustomerTest()
+        public void SearchCustomersTest()
         {
             custT.CustID = 1;
-            custT.TickID = 1;
-            custT.FixDescription = "Add public to the beginning of your class then use [TestClass] above that.";
-            custTRepo.UpdateCustTick(custT);
-        }
-
-        [TestMethod]
-        public void GetCustomersTest()
-        {
-            var test = custTRepo.GetCustTicks();
+            var test = custTRepo.SearchCustTicks(custT);
             Assert.IsNotNull(test);
-        }
-
-        [TestMethod]
-        public void GetCustomerTest()
-        {
-            custT.CustID = 1;
-            custT.TickID = 1;
-            var custTTest = custTRepo.GetCustTick(custT);
-            Assert.AreEqual("Add public to the beginning of your class then use [TestClass] above that.", custTTest.FixDescription);
         }
     }
 }

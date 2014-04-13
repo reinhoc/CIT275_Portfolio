@@ -11,7 +11,10 @@ using reinhoc_HelpDesk.Business_Classes;
 
 namespace reinhoc_HelpDesk.Repositories
 {
-    class EmployeeRepo
+    /// <summary>
+    /// The CRUD operations for an Employee
+    /// </summary>
+    public class EmployeeRepo
     {
         /// <summary>
         /// Gets a list of all employees

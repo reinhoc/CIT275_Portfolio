@@ -8,6 +8,9 @@ using reinhoc_HelpDesk.Business_Classes;
 
 namespace reinhoc_HelpDesk.Facade
 {
+    /// <summary>
+    /// The Help Desk Facade that joins all of the Repo's into one easy to manage class.
+    /// </summary>
     public class HelpFacade
     {
         #region [Declarations]
@@ -20,6 +23,21 @@ namespace reinhoc_HelpDesk.Facade
         EmployeeRepo eR = new EmployeeRepo();
         Employee e = new Employee();
         List<Employee> empsList = new List<Employee>();
+
+        //Ticket creations
+        TicketRepo tR = new TicketRepo();
+        Ticket t = new Ticket();
+        List<Ticket> ticksList = new List<Ticket>();
+
+        //CustTick creations
+        CustTickRepo ctR = new CustTickRepo();
+        CustTick cT = new CustTick();
+        List<CustTick> ctsList = new List<CustTick>();
+
+        //EmpTick creations
+        EmpTickRepo etR = new EmpTickRepo();
+        EmpTick eT = new EmpTick();
+        List<EmpTick> etsList = new List<EmpTick>();
         #endregion
 
         #region [Customer Methods]
@@ -60,8 +78,8 @@ namespace reinhoc_HelpDesk.Facade
         /// Get a single customer
         /// </summary>
         /// <param name="cN">Customer Name</param>
-        /// <returns></returns>
-        public Customer GetCustomer(string cN)
+        /// <returns>Returns a single customer</returns>
+        public Tuple<int, string, string, string, int> GetCustomer(string cN)
         {
             Customer cluster = new Customer();
             foreach (Customer cust in custsList)
@@ -69,16 +87,15 @@ namespace reinhoc_HelpDesk.Facade
                 if (cust.CustName == cN)
                 {
                     cluster = cust;
-                    break;
                 }
-            }
-            //Returns a single customer
+            }            
             cluster = cR.GetCustomer(cluster);
-            return cluster;
+            //Returns a single customer
+            return new Tuple<int,string,string,string,int>(cluster.CustID, cluster.CustName, cluster.CustAddress, cluster.CustState, cluster.CustZip);
         }        
         #endregion
 
-        #region[Employee]
+        #region[Employee Methods]
         /// <summary>
         /// Add an Employee
         /// </summary>
@@ -113,7 +130,7 @@ namespace reinhoc_HelpDesk.Facade
         /// </summary>
         /// <param name="eUN">Employee User Name</param>
         /// <returns>Single Employee</returns>
-        public Employee GetEmployee(string eUN)
+        public Tuple<int, string, string, string> GetEmployee(string eUN)
         {
             Employee cluster = new Employee();
             foreach (Employee emp in empsList)
@@ -125,7 +142,151 @@ namespace reinhoc_HelpDesk.Facade
                 }
             }
             cluster = eR.GetEmployee(cluster);
-            return cluster;
+            //Tuples allow returning multiple values back to the caller of a method. http://msdn.microsoft.com/en-us/library/dd268536(v=vs.110).aspx
+            return new Tuple<int,string,string,string>(cluster.EmpID, cluster.EmpFName, cluster.EmpLName, cluster.EmpUName);
+        }
+        #endregion
+
+        #region [Ticket Methods]
+        /// <summary>
+        /// Adds a ticket to the database
+        /// </summary>
+        /// <param name="pT">Title of the problem</param>
+        /// <param name="pD">Description of the problem</param>
+        /// <param name="tS">Severity of the problem</param>
+        /// <param name="tC">Is the problem completed?</param>
+        /// <param name="tFD">The description of the fix</param>
+        public void AddTicket(string pT, string pD, int tS, bool tC, string tFD)
+        {
+            t.ProblemTitle = pT;
+            t.ProblemDescription = pD;
+            t.Severity = tS;
+            t.Completed = tC;
+            t.FixDescription = tFD;
+            //Adds a ticket
+            tR.InsertTicket(t);
+        }
+        /// <summary>
+        /// Updates a ticket in the database
+        /// </summary>
+        /// <param name="tI">ID of the ticket</param>
+        /// <param name="pT">Title of the problem</param>
+        /// <param name="pD">Description of the problem</param>
+        /// <param name="tS">Severity of the problem</param>
+        /// <param name="tC">Is the problem completed?</param>
+        /// <param name="tFD">The description of the fix</param>
+        public void UpdateTicket(int tI, string pT, string pD, int tS, bool tC, string tFD)
+        {
+            t.TickID = tI;
+            t.ProblemTitle = pT;
+            t.ProblemDescription = pD;
+            t.Severity = tS;
+            t.Completed = tC;
+            t.FixDescription = tFD;
+            //Adds a ticket
+            tR.UpdateTicket(t);
+        }
+        /// <summary>
+        /// Gets a list of TicketIDs from all Tickets
+        /// </summary>
+        /// <returns>A list of TicketIDs</returns>
+        public List<int> GetTickets()
+        {
+            List<int> ticksIDs = new List<int>();
+            ticksList = tR.GetTickets();
+            foreach (var t in ticksList)
+            {
+                ticksIDs.Add(t.TickID);
+            }
+            //Returns a list of Ticket IDs
+            return ticksIDs;
+        }
+        /// <summary>
+        /// Gets a single ticket
+        /// </summary>
+        /// <param name="tI">TicketID</param>
+        /// <returns>Returns a single ticket</returns>
+        public Tuple<int, string, string, int, bool, string> GetTicket(int tI)
+        {
+            Ticket t1 = new Ticket();
+            foreach (Ticket t2 in ticksList)
+            {
+                if (t2.TickID == tI)
+                {
+                    t1 = t2;
+                }
+            }
+            t1 = tR.GetTicket(t1);
+            //Returns a single ticket
+            return new Tuple<int, string, string, int, bool, string>(t1.TickID, t1.ProblemTitle, t1.ProblemDescription, t1.Severity, t1.Completed, t1.FixDescription);
+        }
+        #endregion
+
+        #region[CustTick Methods]
+        /// <summary>
+        /// Add a CustTick to the database
+        /// </summary>
+        /// <param name="cID">Customer ID</param>
+        /// <param name="tID">Ticket ID</param>
+        public void AddCustTick(int cID, int tID)
+        {
+            cT.CustID = cID;
+            cT.TickID = tID;
+            //Adds a CustTick
+            ctR.InsertCustTick(cT);
+        }
+        /// <summary>
+        /// Searches for a list of tickets by customer
+        /// </summary>
+        /// <param name="cI">Customer ID</param>
+        /// <returns></returns>
+        public List<int> SearchCustTicks(int cI)
+        {
+            List<int> custTickList = new List<int>();
+            CustTick c1 = new CustTick();
+            foreach (CustTick custT in ctsList)
+            {
+                if (custT.CustID == cI)
+                {
+                    custTickList.Add(custT.TickID);
+                }
+            }
+            //Returns the list of Tickets
+            return custTickList;
+        }
+        #endregion
+
+        #region [EmpTick Methods]
+        /// <summary>
+        /// Adds an EmpTick to the database
+        /// </summary>
+        /// <param name="eID">Employee ID</param>
+        /// <param name="tID">Ticket ID</param>
+        public void AddEmpTick(int eID, int tID)
+        {
+            eT.EmpID = eID;
+            eT.TickID = tID;
+            //Adds an EmpTick
+            etR.InsertEmpTick(eT);
+        }
+        /// <summary>
+        /// Searchs for a list of tickets by employee
+        /// </summary>
+        /// <param name="empID">Employee ID</param>
+        /// <returns></returns>
+        public List<int> SearchEmpTicks(int empID)
+        {
+            List<int> empTickList = new List<int>();
+            EmpTick e1 = new EmpTick();
+            foreach (EmpTick empT in etsList)
+            {
+                if (empT.EmpID == empID)
+                {
+                    empTickList.Add(empT.EmpID);
+                }
+            }
+            //Returns the list of Tickets
+            return empTickList;
         }
         #endregion
     }

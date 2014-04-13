@@ -11,16 +11,24 @@ using reinhoc_HelpDesk.Business_Classes;
 
 namespace reinhoc_HelpDesk.Repositories
 {
-    class EmpTickRepo
+    /// <summary>
+    /// The CRUD operations for an EmpTick
+    /// </summary>
+    public class EmpTickRepo
     {
-
-        public List<EmpTick> GetEmpTicks()
+        /// <summary>
+        /// Search for tickets by employee
+        /// </summary>
+        /// <param name="empT">An EmpTick parameter</param>
+        /// <returns></returns>
+        public List<EmpTick> SearchEmpTicks(EmpTick empT)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
             var sb = new StringBuilder();
             sb.Append("Select EmpID, TickID ");
-            sb.Append("From EmpTick");
+            sb.Append("From EmpTick ");
+            sb.Append("Where EmpID ='").Append(empT.EmpID).Append("';");
 
             using (corpcn)
             {
@@ -41,39 +49,10 @@ namespace reinhoc_HelpDesk.Repositories
                 return empTicks;
             }
         }
-
-        public EmpTick GetEmpTick(EmpTick empTTick)
-        {
-            SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
-
-            var sb = new StringBuilder();
-            sb.Append("Select EmpID, TickID ");
-            sb.Append("From EmpTick ");
-            sb.Append("Where EmpID = '").Append(empTTick.EmpID).Append("'");
-            sb.Append("and TickID= '").Append(empTTick.TickID).Append("';");
-
-            using (corpcn)
-            {
-                //Needed this here to be able to use the variable towards the end. Some type of scope error.
-                EmpTick empTick = null;
-
-                SqlCommand corpCmd = corpcn.CreateCommand();
-                corpCmd.CommandType = CommandType.Text;
-                corpCmd.CommandText = sb.ToString();
-                corpcn.Open();
-                SqlDataReader corprdr = corpCmd.ExecuteReader();
-
-                while (corprdr.Read())
-                {
-                    empTick = CreateEmpTick(corprdr);
-                }
-
-                corprdr.Close();
-
-                return empTick;
-            }
-        }
-
+        /// <summary>
+        /// Add a EmpTick
+        /// </summary>
+        /// <param name="emp">An EmpTick parameter</param>
         public void InsertEmpTick(EmpTick emp)
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
@@ -94,31 +73,6 @@ namespace reinhoc_HelpDesk.Repositories
                 corpCmd.ExecuteNonQuery();
             }
         }
-
-        //public void UpdateCustomer(EmpTick emp)
-        //{
-        //    SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
-
-        //    var sb = new StringBuilder();
-        //    sb.Append("Update [EmpTick]");
-        //    sb.Append(" Set ");
-        //    sb.Append("[EmpID]='").Append(emp.EmpID).Append("',");
-        //    sb.Append("[TickID]='").Append(emp.TickID).Append("'");
-        //    sb.Append("Where [EmpID]='").Append(emp.EmpID).Append("'");
-        //    sb.Append("and [TickID]=").Append(emp.TickID).Append("';");
-
-
-        //    using (corpcn)
-        //    {
-        //        SqlCommand corpCmd = corpcn.CreateCommand();
-        //        corpCmd.CommandType = CommandType.Text;
-        //        corpCmd.CommandText = sb.ToString();
-        //        corpcn.Open();
-        //        corpCmd.ExecuteNonQuery();
-        //    }
-        //}
-
-
         private EmpTick CreateEmpTick(SqlDataReader dr)
         {
             var e = new EmpTick();

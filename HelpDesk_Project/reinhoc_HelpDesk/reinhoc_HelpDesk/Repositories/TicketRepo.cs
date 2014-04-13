@@ -11,14 +11,17 @@ using reinhoc_HelpDesk.Business_Classes;
 
 namespace reinhoc_HelpDesk.Repositories
 {
-    class TicketRepo
+    /// <summary>
+    /// The CRUD operations for a Ticket
+    /// </summary>
+    public class TicketRepo
     {
         public List<Ticket> GetTickets()
         {
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
             var sb = new StringBuilder();
-            sb.Append("Select TickID, ProblemTitle, ProblemDescription, Severity, Completed ");
+            sb.Append("Select TickID, ProblemTitle, ProblemDescription, Severity, Completed, FixDescription ");
             sb.Append("From Ticket");
 
             using (corpcn)
@@ -46,7 +49,7 @@ namespace reinhoc_HelpDesk.Repositories
             SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
 
             var sb = new StringBuilder();
-            sb.Append("Select TickID, ProblemTitle, ProblemDescription, Severity, Completed ");
+            sb.Append("Select TickID, ProblemTitle, ProblemDescription, Severity, Completed, FixDescription ");
             sb.Append("From Ticket ");
             sb.Append("Where TickID = '").Append(ticket.TickID).Append("';");
 
@@ -78,12 +81,13 @@ namespace reinhoc_HelpDesk.Repositories
 
             var sb = new StringBuilder();
             sb.Append("Insert Into [Ticket]");
-            sb.Append(" ([ProblemTitle], [ProblemDescription], [Severity], [Completed])");
+            sb.Append(" ([ProblemTitle], [ProblemDescription], [Severity], [Completed], [FixDescription])");
             sb.Append(" Values (");
             sb.Append("'").Append(tick.ProblemTitle).Append("',");
             sb.Append("'").Append(tick.ProblemDescription).Append("',");
             sb.Append("'").Append(tick.Severity).Append("',");
-            sb.Append("'").Append(tick.Completed).Append("')");
+            sb.Append("'").Append(tick.Completed).Append("',");
+            sb.Append("'").Append(tick.FixDescription).Append("');");
 
             using (corpcn)
             {
@@ -105,7 +109,8 @@ namespace reinhoc_HelpDesk.Repositories
             sb.Append("[ProblemTitle]='").Append(tick.ProblemTitle).Append("',");
             sb.Append("[ProblemDescription]='").Append(tick.ProblemDescription).Append("',");
             sb.Append("[Severity]=").Append(tick.Severity).Append(",");
-            sb.Append("[Completed]='").Append(tick.Completed).Append("'");
+            sb.Append("[Completed]='").Append(tick.Completed).Append("',");
+            sb.Append("[FixDescription]='").Append(tick.FixDescription).Append("'");
             sb.Append("Where [TickID]=").Append(tick.TickID);
 
 
@@ -127,6 +132,7 @@ namespace reinhoc_HelpDesk.Repositories
             t.ProblemDescription = dr["ProblemDescription"].ToString();
             t.Severity = (int)dr["Severity"];
             t.Completed = (bool)dr["Completed"];
+            t.FixDescription = dr["FixDescription"].ToString();
             return t;
         }
     }
