@@ -16,5 +16,23 @@ namespace reinhoc_HelpDesk
         {
             InitializeComponent();
         }
+
+        private void btnAddCust_Click(object sender, EventArgs e)
+        {
+            frmCust frc = new frmCust();
+            frc.ShowDialog();
+        }
+
+        private void btnEmployee_Click(object sender, EventArgs e)
+        {
+            frmEmp fre = new frmEmp();
+            fre.ShowDialog();
+        }
+
+        private void btnTicket_Click(object sender, EventArgs e)
+        {
+            frmManageTick frM = new frmManageTick();
+            frM.ShowDialog();
+        }
     }
 }

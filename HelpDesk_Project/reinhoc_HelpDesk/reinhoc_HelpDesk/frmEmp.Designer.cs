@@ -31,9 +31,9 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.gboCustBox = new System.Windows.Forms.GroupBox();
-            this.txtCustState = new System.Windows.Forms.TextBox();
-            this.txtCustAddress = new System.Windows.Forms.TextBox();
-            this.txtCustName = new System.Windows.Forms.TextBox();
+            this.txtUserName = new System.Windows.Forms.TextBox();
+            this.txtLastName = new System.Windows.Forms.TextBox();
+            this.txtFirstName = new System.Windows.Forms.TextBox();
             this.lblEmpUName = new System.Windows.Forms.Label();
             this.lblEmpLName = new System.Windows.Forms.Label();
             this.lblEmpFName = new System.Windows.Forms.Label();
@@ -59,12 +59,13 @@
             this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // gboCustBox
             // 
-            this.gboCustBox.Controls.Add(this.txtCustState);
-            this.gboCustBox.Controls.Add(this.txtCustAddress);
-            this.gboCustBox.Controls.Add(this.txtCustName);
+            this.gboCustBox.Controls.Add(this.txtUserName);
+            this.gboCustBox.Controls.Add(this.txtLastName);
+            this.gboCustBox.Controls.Add(this.txtFirstName);
             this.gboCustBox.Controls.Add(this.lblEmpUName);
             this.gboCustBox.Controls.Add(this.lblEmpLName);
             this.gboCustBox.Controls.Add(this.lblEmpFName);
@@ -75,26 +76,26 @@
             this.gboCustBox.TabStop = false;
             this.gboCustBox.Text = "Customer";
             // 
-            // txtCustState
+            // txtUserName
             // 
-            this.txtCustState.Location = new System.Drawing.Point(68, 75);
-            this.txtCustState.Name = "txtCustState";
-            this.txtCustState.Size = new System.Drawing.Size(88, 20);
-            this.txtCustState.TabIndex = 6;
+            this.txtUserName.Location = new System.Drawing.Point(68, 75);
+            this.txtUserName.Name = "txtUserName";
+            this.txtUserName.Size = new System.Drawing.Size(88, 20);
+            this.txtUserName.TabIndex = 6;
             // 
-            // txtCustAddress
+            // txtLastName
             // 
-            this.txtCustAddress.Location = new System.Drawing.Point(68, 48);
-            this.txtCustAddress.Name = "txtCustAddress";
-            this.txtCustAddress.Size = new System.Drawing.Size(186, 20);
-            this.txtCustAddress.TabIndex = 5;
+            this.txtLastName.Location = new System.Drawing.Point(68, 48);
+            this.txtLastName.Name = "txtLastName";
+            this.txtLastName.Size = new System.Drawing.Size(186, 20);
+            this.txtLastName.TabIndex = 5;
             // 
-            // txtCustName
+            // txtFirstName
             // 
-            this.txtCustName.Location = new System.Drawing.Point(68, 20);
-            this.txtCustName.Name = "txtCustName";
-            this.txtCustName.Size = new System.Drawing.Size(186, 20);
-            this.txtCustName.TabIndex = 4;
+            this.txtFirstName.Location = new System.Drawing.Point(68, 20);
+            this.txtFirstName.Name = "txtFirstName";
+            this.txtFirstName.Size = new System.Drawing.Size(186, 20);
+            this.txtFirstName.TabIndex = 4;
             // 
             // lblEmpUName
             // 
@@ -123,7 +124,7 @@
             this.lblEmpFName.TabIndex = 0;
             this.lblEmpFName.Text = "First Name:";
             // 
-            // empForm
+            // frmEmp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -131,7 +132,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.gboCustBox);
-            this.Name = "empForm";
+            this.Name = "frmEmp";
             this.Text = "Add Employee";
             this.gboCustBox.ResumeLayout(false);
             this.gboCustBox.PerformLayout();
@@ -144,9 +145,9 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.GroupBox gboCustBox;
-        private System.Windows.Forms.TextBox txtCustState;
-        private System.Windows.Forms.TextBox txtCustAddress;
-        private System.Windows.Forms.TextBox txtCustName;
+        private System.Windows.Forms.TextBox txtUserName;
+        private System.Windows.Forms.TextBox txtLastName;
+        private System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.Label lblEmpUName;
         private System.Windows.Forms.Label lblEmpLName;
         private System.Windows.Forms.Label lblEmpFName;

@@ -69,12 +69,6 @@
     <Compile Include="frmManageTick.Designer.cs">
       <DependentUpon>frmManageTick.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTicket.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmTicket.Designer.cs">
-      <DependentUpon>frmTicket.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +86,7 @@
     <Compile Include="Unit_Tests\CustTickRepoTest.cs" />
     <Compile Include="Unit_Tests\EmployeeRepoTest.cs" />
     <Compile Include="Unit_Tests\EmpTickTest.cs" />
+    <Compile Include="Unit_Tests\HelpFacadeTest.cs" />
     <Compile Include="Unit_Tests\TickRepoTest.cs" />
     <EmbeddedResource Include="frmCust.resx">
       <DependentUpon>frmCust.cs</DependentUpon>
@@ -104,9 +99,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmManageTick.resx">
       <DependentUpon>frmManageTick.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmTicket.resx">
-      <DependentUpon>frmTicket.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

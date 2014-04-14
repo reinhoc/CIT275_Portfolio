@@ -17,6 +17,40 @@ namespace reinhoc_HelpDesk.Repositories
     public class CustTickRepo
     {
         /// <summary>
+        /// Gets a list of CustTicks
+        /// </summary>
+        /// <returns>A list of CustTicks</returns>
+        public List<CustTick> ListCustTicks()
+        {
+            List<CustTick> searchTicks = new List<CustTick>();
+            SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
+
+            var sb = new StringBuilder();
+            sb.Append("Select CustID, TickID ");
+            sb.Append("From CustTick ");
+            using (corpcn)
+            {
+                //Needed this here to be able to use the variable towards the end. Some type of scope error.
+                CustTick custTick = null;
+
+                SqlCommand corpCmd = corpcn.CreateCommand();
+                corpCmd.CommandType = CommandType.Text;
+                corpCmd.CommandText = sb.ToString();
+                corpcn.Open();
+                SqlDataReader corprdr = corpCmd.ExecuteReader();
+
+                while (corprdr.Read())
+                {
+                    custTick = CreateCustTick(corprdr);
+                    searchTicks.Add(custTick);
+                }
+
+                corprdr.Close();
+
+                return searchTicks;
+            }
+        }
+        /// <summary>
         /// Search for tickets by customer.
         /// </summary>
         /// <param name="custT">A CustTick parameter</param>

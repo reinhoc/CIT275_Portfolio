@@ -22,20 +22,5 @@ namespace reinhoc_HelpDesk.Unit_Tests
             empTick.TickID = 2;
             empTickRepo.InsertEmpTick(empTick);
         }
-        //[TestMethod]
-        //public void GetEmpTicksTest()
-        //{
-        //    var test = empTickRepo.GetEmpTicks();
-        //    Assert.AreEqual(2, test.Count());
-        //}
-
-        //[TestMethod]
-        //public void GetEmpTickTest()
-        //{
-        //    empTick.EmpID = 1;
-        //    empTick.TickID = 1;
-        //    var empTTest = empTickRepo.GetEmpTick(empTick);
-        //    Assert.IsNotNull(empTTest);
-        //}
     }
 }

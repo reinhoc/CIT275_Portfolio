@@ -17,6 +17,37 @@ namespace reinhoc_HelpDesk.Repositories
     public class EmpTickRepo
     {
         /// <summary>
+        /// Gets the list of EmpTicks
+        /// </summary>
+        /// <returns>Returns a list of EmpTicks</returns>
+        public List<EmpTick> ListEmpTicks()
+        {
+            SqlConnection corpcn = new SqlConnection(Settings.Default.cnHelpDesk);
+
+            var sb = new StringBuilder();
+            sb.Append("Select EmpID, TickID ");
+            sb.Append("From EmpTick");
+
+            using (corpcn)
+            {
+                List<EmpTick> empTicks = new List<EmpTick>();
+                SqlCommand corpCmd = corpcn.CreateCommand();
+                corpCmd.CommandType = CommandType.Text;
+                corpCmd.CommandText = sb.ToString();
+                corpcn.Open();
+                SqlDataReader corprdr = corpCmd.ExecuteReader();
+
+                while (corprdr.Read())
+                {
+                    EmpTick empTick = CreateEmpTick(corprdr);
+                    empTicks.Add(empTick);
+                }
+
+                corprdr.Close();
+                return empTicks;
+            }
+        }
+        /// <summary>
         /// Search for tickets by employee
         /// </summary>
         /// <param name="empT">An EmpTick parameter</param>

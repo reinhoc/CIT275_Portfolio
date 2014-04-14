@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using reinhoc_HelpDesk.Facade;
 
 namespace reinhoc_HelpDesk
 {
@@ -15,6 +16,16 @@ namespace reinhoc_HelpDesk
         public frmCust()
         {
             InitializeComponent();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            HelpFacade help = new HelpFacade();
+            string name = txtCustName.Text.ToString();
+            string address = txtCustAddress.Text.ToString();
+            string state = txtCustState.Text.ToString();
+            int zip = int.Parse(txtCustZip.Text);
+            help.AddCustomer(name, address, state, zip);
         }
     }
 }

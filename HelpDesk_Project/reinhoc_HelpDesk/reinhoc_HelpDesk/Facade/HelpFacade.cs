@@ -92,7 +92,26 @@ namespace reinhoc_HelpDesk.Facade
             cluster = cR.GetCustomer(cluster);
             //Returns a single customer
             return new Tuple<int,string,string,string,int>(cluster.CustID, cluster.CustName, cluster.CustAddress, cluster.CustState, cluster.CustZip);
-        }        
+        }
+        /// <summary>
+        /// Get a Customer by it's ID
+        /// </summary>
+        /// <param name="cID">Customer ID</param>
+        /// <returns>Customer</returns>
+        public Tuple<int, string, string, string, int> GetCustomerByID(int cID)
+        {
+            Customer cluster = new Customer();
+            foreach (Customer cust in custsList)
+            {
+                if (cust.CustID == cID)
+                {
+                    cluster = cust;
+                }
+            }
+            cluster = cR.GetCustomer(cluster);
+            //Returns a single customer
+            return new Tuple<int, string, string, string, int>(cluster.CustID, cluster.CustName, cluster.CustAddress, cluster.CustState, cluster.CustZip);
+        }
         #endregion
 
         #region[Employee Methods]
@@ -138,12 +157,25 @@ namespace reinhoc_HelpDesk.Facade
                 if (emp.EmpUName == eUN)
                 {
                     cluster = emp;
-                    break;
                 }
             }
             cluster = eR.GetEmployee(cluster);
             //Tuples allow returning multiple values back to the caller of a method. http://msdn.microsoft.com/en-us/library/dd268536(v=vs.110).aspx
             return new Tuple<int,string,string,string>(cluster.EmpID, cluster.EmpFName, cluster.EmpLName, cluster.EmpUName);
+        }
+        public int GetEmployeeByID(int eID)
+        {
+            Employee cluster = new Employee();
+            foreach (Employee emp in empsList)
+            {
+                if (emp.EmpID == eID)
+                {
+                    cluster = emp;
+                }
+            }
+            cluster = eR.GetEmployee(cluster);
+            //Tuples allow returning multiple values back to the caller of a method. http://msdn.microsoft.com/en-us/library/dd268536(v=vs.110).aspx
+            return cluster.EmpID;
         }
         #endregion
 
@@ -206,14 +238,14 @@ namespace reinhoc_HelpDesk.Facade
         /// </summary>
         /// <param name="tI">TicketID</param>
         /// <returns>Returns a single ticket</returns>
-        public Tuple<int, string, string, int, bool, string> GetTicket(int tI)
+        public Tuple<int, string, string, int, bool, string> GetTicket(int tID)
         {
             Ticket t1 = new Ticket();
-            foreach (Ticket t2 in ticksList)
+            foreach (Ticket tItems in ticksList)
             {
-                if (t2.TickID == tI)
+                if (tItems.TickID == tID)
                 {
-                    t1 = t2;
+                    t1 = tItems;
                 }
             }
             t1 = tR.GetTicket(t1);
@@ -223,6 +255,13 @@ namespace reinhoc_HelpDesk.Facade
         #endregion
 
         #region[CustTick Methods]
+        /// <summary>
+        /// Gathers a list of CustTicks
+        /// </summary>
+        private void ListCustTicks()
+        {
+            ctsList = ctR.ListCustTicks();
+        }
         /// <summary>
         /// Add a CustTick to the database
         /// </summary>
@@ -242,6 +281,7 @@ namespace reinhoc_HelpDesk.Facade
         /// <returns></returns>
         public List<int> SearchCustTicks(int cI)
         {
+            ListCustTicks();
             List<int> custTickList = new List<int>();
             CustTick c1 = new CustTick();
             foreach (CustTick custT in ctsList)
@@ -254,9 +294,33 @@ namespace reinhoc_HelpDesk.Facade
             //Returns the list of Tickets
             return custTickList;
         }
+        /// <summary>
+        /// Search for the customer of the ticket
+        /// </summary>
+        /// <param name="tI">Ticket ID</param>
+        /// <returns></returns>
+        public int SearchForCust(int tI)
+        {
+            int custID = 0;
+            ListCustTicks();
+            CustTick c1 = new CustTick();
+            foreach (CustTick custT in ctsList)
+            {
+                if (custT.TickID == tI)
+                {
+                    custID = custT.CustID;
+                }
+            }
+            //Returns the list of Tickets
+            return custID;
+        }
         #endregion
 
         #region [EmpTick Methods]
+        private void ListEmpTicks()
+        {
+            etsList = etR.ListEmpTicks();
+        }
         /// <summary>
         /// Adds an EmpTick to the database
         /// </summary>
@@ -276,6 +340,7 @@ namespace reinhoc_HelpDesk.Facade
         /// <returns></returns>
         public List<int> SearchEmpTicks(int empID)
         {
+            ListEmpTicks();
             List<int> empTickList = new List<int>();
             EmpTick e1 = new EmpTick();
             foreach (EmpTick empT in etsList)
@@ -287,6 +352,21 @@ namespace reinhoc_HelpDesk.Facade
             }
             //Returns the list of Tickets
             return empTickList;
+        }
+        public int SearchForEmp(int tickID)
+        {
+            int employeeID = 0;
+            ListEmpTicks();            
+            EmpTick e1 = new EmpTick();
+            foreach (EmpTick empT in etsList)
+            {
+                if (empT.TickID == tickID)
+                {
+                    employeeID = empT.EmpID;
+                }
+            }
+            //Returns the list of Tickets
+            return employeeID;
         }
         #endregion
     }

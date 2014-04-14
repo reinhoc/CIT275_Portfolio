@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.gboCustBox = new System.Windows.Forms.GroupBox();
-            this.lblCustName = new System.Windows.Forms.Label();
-            this.lblCustAddress = new System.Windows.Forms.Label();
-            this.lblCustState = new System.Windows.Forms.Label();
-            this.lblCustZip = new System.Windows.Forms.Label();
-            this.txtCustName = new System.Windows.Forms.TextBox();
-            this.txtCustAddress = new System.Windows.Forms.TextBox();
-            this.txtCustState = new System.Windows.Forms.TextBox();
             this.txtCustZip = new System.Windows.Forms.TextBox();
+            this.txtCustState = new System.Windows.Forms.TextBox();
+            this.txtCustAddress = new System.Windows.Forms.TextBox();
+            this.txtCustName = new System.Windows.Forms.TextBox();
+            this.lblCustZip = new System.Windows.Forms.Label();
+            this.lblCustState = new System.Windows.Forms.Label();
+            this.lblCustAddress = new System.Windows.Forms.Label();
+            this.lblCustName = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.gboCustBox.SuspendLayout();
@@ -59,32 +59,33 @@
             this.gboCustBox.TabStop = false;
             this.gboCustBox.Text = "Customer";
             // 
-            // lblCustName
+            // txtCustZip
             // 
-            this.lblCustName.AutoSize = true;
-            this.lblCustName.Location = new System.Drawing.Point(7, 23);
-            this.lblCustName.Name = "lblCustName";
-            this.lblCustName.Size = new System.Drawing.Size(54, 13);
-            this.lblCustName.TabIndex = 0;
-            this.lblCustName.Text = "Customer:";
+            this.txtCustZip.Location = new System.Drawing.Point(68, 102);
+            this.txtCustZip.Name = "txtCustZip";
+            this.txtCustZip.Size = new System.Drawing.Size(88, 20);
+            this.txtCustZip.TabIndex = 7;
             // 
-            // lblCustAddress
+            // txtCustState
             // 
-            this.lblCustAddress.AutoSize = true;
-            this.lblCustAddress.Location = new System.Drawing.Point(7, 51);
-            this.lblCustAddress.Name = "lblCustAddress";
-            this.lblCustAddress.Size = new System.Drawing.Size(48, 13);
-            this.lblCustAddress.TabIndex = 1;
-            this.lblCustAddress.Text = "Address:";
+            this.txtCustState.Location = new System.Drawing.Point(68, 75);
+            this.txtCustState.Name = "txtCustState";
+            this.txtCustState.Size = new System.Drawing.Size(88, 20);
+            this.txtCustState.TabIndex = 6;
             // 
-            // lblCustState
+            // txtCustAddress
             // 
-            this.lblCustState.AutoSize = true;
-            this.lblCustState.Location = new System.Drawing.Point(6, 78);
-            this.lblCustState.Name = "lblCustState";
-            this.lblCustState.Size = new System.Drawing.Size(35, 13);
-            this.lblCustState.TabIndex = 2;
-            this.lblCustState.Text = "State:";
+            this.txtCustAddress.Location = new System.Drawing.Point(68, 48);
+            this.txtCustAddress.Name = "txtCustAddress";
+            this.txtCustAddress.Size = new System.Drawing.Size(186, 20);
+            this.txtCustAddress.TabIndex = 5;
+            // 
+            // txtCustName
+            // 
+            this.txtCustName.Location = new System.Drawing.Point(68, 20);
+            this.txtCustName.Name = "txtCustName";
+            this.txtCustName.Size = new System.Drawing.Size(186, 20);
+            this.txtCustName.TabIndex = 4;
             // 
             // lblCustZip
             // 
@@ -95,33 +96,32 @@
             this.lblCustZip.TabIndex = 3;
             this.lblCustZip.Text = "Zip Code:";
             // 
-            // txtCustName
+            // lblCustState
             // 
-            this.txtCustName.Location = new System.Drawing.Point(68, 20);
-            this.txtCustName.Name = "txtCustName";
-            this.txtCustName.Size = new System.Drawing.Size(186, 20);
-            this.txtCustName.TabIndex = 4;
+            this.lblCustState.AutoSize = true;
+            this.lblCustState.Location = new System.Drawing.Point(6, 78);
+            this.lblCustState.Name = "lblCustState";
+            this.lblCustState.Size = new System.Drawing.Size(35, 13);
+            this.lblCustState.TabIndex = 2;
+            this.lblCustState.Text = "State:";
             // 
-            // txtCustAddress
+            // lblCustAddress
             // 
-            this.txtCustAddress.Location = new System.Drawing.Point(68, 48);
-            this.txtCustAddress.Name = "txtCustAddress";
-            this.txtCustAddress.Size = new System.Drawing.Size(186, 20);
-            this.txtCustAddress.TabIndex = 5;
+            this.lblCustAddress.AutoSize = true;
+            this.lblCustAddress.Location = new System.Drawing.Point(7, 51);
+            this.lblCustAddress.Name = "lblCustAddress";
+            this.lblCustAddress.Size = new System.Drawing.Size(48, 13);
+            this.lblCustAddress.TabIndex = 1;
+            this.lblCustAddress.Text = "Address:";
             // 
-            // txtCustState
+            // lblCustName
             // 
-            this.txtCustState.Location = new System.Drawing.Point(68, 75);
-            this.txtCustState.Name = "txtCustState";
-            this.txtCustState.Size = new System.Drawing.Size(88, 20);
-            this.txtCustState.TabIndex = 6;
-            // 
-            // txtCustZip
-            // 
-            this.txtCustZip.Location = new System.Drawing.Point(68, 102);
-            this.txtCustZip.Name = "txtCustZip";
-            this.txtCustZip.Size = new System.Drawing.Size(88, 20);
-            this.txtCustZip.TabIndex = 7;
+            this.lblCustName.AutoSize = true;
+            this.lblCustName.Location = new System.Drawing.Point(7, 23);
+            this.lblCustName.Name = "lblCustName";
+            this.lblCustName.Size = new System.Drawing.Size(54, 13);
+            this.lblCustName.TabIndex = 0;
+            this.lblCustName.Text = "Customer:";
             // 
             // btnAdd
             // 
@@ -132,6 +132,7 @@
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnCancel
             // 
@@ -143,7 +144,7 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // custForm
+            // frmCust
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -151,7 +152,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.gboCustBox);
-            this.Name = "custForm";
+            this.Name = "frmCust";
             this.Text = "Add Customer";
             this.gboCustBox.ResumeLayout(false);
             this.gboCustBox.PerformLayout();
