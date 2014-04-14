@@ -35,6 +35,13 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.gboTickBox = new System.Windows.Forms.GroupBox();
+            this.numSeverity = new System.Windows.Forms.NumericUpDown();
+            this.lblSeverity = new System.Windows.Forms.Label();
+            this.cboUserName = new System.Windows.Forms.ComboBox();
+            this.lblEmpUN = new System.Windows.Forms.Label();
+            this.cboCustomer = new System.Windows.Forms.ComboBox();
+            this.txtFixDescription = new System.Windows.Forms.TextBox();
+            this.lblFixDescription = new System.Windows.Forms.Label();
             this.ckbTickComplete = new System.Windows.Forms.CheckBox();
             this.txtTickDescription = new System.Windows.Forms.TextBox();
             this.txtTickTitle = new System.Windows.Forms.TextBox();
@@ -42,18 +49,12 @@
             this.lblTickDescription = new System.Windows.Forms.Label();
             this.lblCustAddress = new System.Windows.Forms.Label();
             this.lblCustName = new System.Windows.Forms.Label();
-            this.txtFixDescription = new System.Windows.Forms.TextBox();
-            this.lblFixDescription = new System.Windows.Forms.Label();
-            this.cboCustomer = new System.Windows.Forms.ComboBox();
-            this.lblEmpUN = new System.Windows.Forms.Label();
-            this.cboUserName = new System.Windows.Forms.ComboBox();
             this.lblSearchTicketID = new System.Windows.Forms.Label();
             this.cboSearchTicket = new System.Windows.Forms.ComboBox();
             this.cboSearchCustomer = new System.Windows.Forms.ComboBox();
             this.lblSearchCustomer = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.lblSeverity = new System.Windows.Forms.Label();
-            this.numSeverity = new System.Windows.Forms.NumericUpDown();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.gboTickBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSeverity)).BeginInit();
             this.SuspendLayout();
@@ -98,7 +99,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(96, 392);
+            this.btnCancel.Location = new System.Drawing.Point(173, 392);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
@@ -113,6 +114,7 @@
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // gboTickBox
             // 
@@ -140,6 +142,68 @@
             this.gboTickBox.TabIndex = 4;
             this.gboTickBox.TabStop = false;
             this.gboTickBox.Text = "Ticket";
+            // 
+            // numSeverity
+            // 
+            this.numSeverity.Location = new System.Drawing.Point(160, 208);
+            this.numSeverity.Name = "numSeverity";
+            this.numSeverity.Size = new System.Drawing.Size(34, 20);
+            this.numSeverity.TabIndex = 14;
+            // 
+            // lblSeverity
+            // 
+            this.lblSeverity.AutoSize = true;
+            this.lblSeverity.Location = new System.Drawing.Point(106, 209);
+            this.lblSeverity.Name = "lblSeverity";
+            this.lblSeverity.Size = new System.Drawing.Size(48, 13);
+            this.lblSeverity.TabIndex = 13;
+            this.lblSeverity.Text = "Severity:";
+            // 
+            // cboUserName
+            // 
+            this.cboUserName.FormattingEnabled = true;
+            this.cboUserName.Location = new System.Drawing.Point(200, 13);
+            this.cboUserName.Name = "cboUserName";
+            this.cboUserName.Size = new System.Drawing.Size(222, 21);
+            this.cboUserName.TabIndex = 12;
+            // 
+            // lblEmpUN
+            // 
+            this.lblEmpUN.AutoSize = true;
+            this.lblEmpUN.Location = new System.Drawing.Point(131, 16);
+            this.lblEmpUN.Name = "lblEmpUN";
+            this.lblEmpUN.Size = new System.Drawing.Size(63, 13);
+            this.lblEmpUN.TabIndex = 11;
+            this.lblEmpUN.Text = "User Name:";
+            // 
+            // cboCustomer
+            // 
+            this.cboCustomer.FormattingEnabled = true;
+            this.cboCustomer.Location = new System.Drawing.Point(84, 51);
+            this.cboCustomer.Name = "cboCustomer";
+            this.cboCustomer.Size = new System.Drawing.Size(338, 21);
+            this.cboCustomer.TabIndex = 10;
+            // 
+            // txtFixDescription
+            // 
+            this.txtFixDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFixDescription.Location = new System.Drawing.Point(84, 230);
+            this.txtFixDescription.Multiline = true;
+            this.txtFixDescription.Name = "txtFixDescription";
+            this.txtFixDescription.Size = new System.Drawing.Size(338, 100);
+            this.txtFixDescription.TabIndex = 9;
+            // 
+            // lblFixDescription
+            // 
+            this.lblFixDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblFixDescription.AutoSize = true;
+            this.lblFixDescription.Location = new System.Drawing.Point(6, 230);
+            this.lblFixDescription.Name = "lblFixDescription";
+            this.lblFixDescription.Size = new System.Drawing.Size(79, 13);
+            this.lblFixDescription.TabIndex = 8;
+            this.lblFixDescription.Text = "Fix Description:";
             // 
             // ckbTickComplete
             // 
@@ -213,52 +277,6 @@
             this.lblCustName.TabIndex = 0;
             this.lblCustName.Text = "Customer:";
             // 
-            // txtFixDescription
-            // 
-            this.txtFixDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFixDescription.Location = new System.Drawing.Point(84, 230);
-            this.txtFixDescription.Multiline = true;
-            this.txtFixDescription.Name = "txtFixDescription";
-            this.txtFixDescription.Size = new System.Drawing.Size(338, 100);
-            this.txtFixDescription.TabIndex = 9;
-            // 
-            // lblFixDescription
-            // 
-            this.lblFixDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFixDescription.AutoSize = true;
-            this.lblFixDescription.Location = new System.Drawing.Point(6, 230);
-            this.lblFixDescription.Name = "lblFixDescription";
-            this.lblFixDescription.Size = new System.Drawing.Size(79, 13);
-            this.lblFixDescription.TabIndex = 8;
-            this.lblFixDescription.Text = "Fix Description:";
-            // 
-            // cboCustomer
-            // 
-            this.cboCustomer.FormattingEnabled = true;
-            this.cboCustomer.Location = new System.Drawing.Point(84, 51);
-            this.cboCustomer.Name = "cboCustomer";
-            this.cboCustomer.Size = new System.Drawing.Size(338, 21);
-            this.cboCustomer.TabIndex = 10;
-            // 
-            // lblEmpUN
-            // 
-            this.lblEmpUN.AutoSize = true;
-            this.lblEmpUN.Location = new System.Drawing.Point(131, 16);
-            this.lblEmpUN.Name = "lblEmpUN";
-            this.lblEmpUN.Size = new System.Drawing.Size(63, 13);
-            this.lblEmpUN.TabIndex = 11;
-            this.lblEmpUN.Text = "User Name:";
-            // 
-            // cboUserName
-            // 
-            this.cboUserName.FormattingEnabled = true;
-            this.cboUserName.Location = new System.Drawing.Point(200, 13);
-            this.cboUserName.Name = "cboUserName";
-            this.cboUserName.Size = new System.Drawing.Size(222, 21);
-            this.cboUserName.TabIndex = 12;
-            // 
             // lblSearchTicketID
             // 
             this.lblSearchTicketID.AutoSize = true;
@@ -297,7 +315,7 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(178, 391);
+            this.btnRefresh.Location = new System.Drawing.Point(254, 392);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnRefresh.TabIndex = 11;
@@ -305,27 +323,22 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // lblSeverity
+            // btnUpdate
             // 
-            this.lblSeverity.AutoSize = true;
-            this.lblSeverity.Location = new System.Drawing.Point(106, 209);
-            this.lblSeverity.Name = "lblSeverity";
-            this.lblSeverity.Size = new System.Drawing.Size(48, 13);
-            this.lblSeverity.TabIndex = 13;
-            this.lblSeverity.Text = "Severity:";
-            // 
-            // numSeverity
-            // 
-            this.numSeverity.Location = new System.Drawing.Point(160, 208);
-            this.numSeverity.Name = "numSeverity";
-            this.numSeverity.Size = new System.Drawing.Size(34, 20);
-            this.numSeverity.TabIndex = 14;
+            this.btnUpdate.Location = new System.Drawing.Point(92, 392);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.TabIndex = 12;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // frmManageTick
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(462, 427);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.lblSearchCustomer);
             this.Controls.Add(this.cboSearchCustomer);
@@ -374,5 +387,6 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.NumericUpDown numSeverity;
         private System.Windows.Forms.Label lblSeverity;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }

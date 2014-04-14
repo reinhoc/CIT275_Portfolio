@@ -163,7 +163,12 @@ namespace reinhoc_HelpDesk.Facade
             //Tuples allow returning multiple values back to the caller of a method. http://msdn.microsoft.com/en-us/library/dd268536(v=vs.110).aspx
             return new Tuple<int,string,string,string>(cluster.EmpID, cluster.EmpFName, cluster.EmpLName, cluster.EmpUName);
         }
-        public int GetEmployeeByID(int eID)
+        /// <summary>
+        /// Gets an Employee Username by ID
+        /// </summary>
+        /// <param name="eID">Employee ID</param>
+        /// <returns></returns>
+        public string GetEmployeeByID(int eID)
         {
             Employee cluster = new Employee();
             foreach (Employee emp in empsList)
@@ -175,7 +180,7 @@ namespace reinhoc_HelpDesk.Facade
             }
             cluster = eR.GetEmployee(cluster);
             //Tuples allow returning multiple values back to the caller of a method. http://msdn.microsoft.com/en-us/library/dd268536(v=vs.110).aspx
-            return cluster.EmpID;
+            return cluster.EmpUName;
         }
         #endregion
 
@@ -347,7 +352,7 @@ namespace reinhoc_HelpDesk.Facade
             {
                 if (empT.EmpID == empID)
                 {
-                    empTickList.Add(empT.EmpID);
+                    empTickList.Add(empT.TickID);
                 }
             }
             //Returns the list of Tickets
